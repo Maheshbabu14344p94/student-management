@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Support and Wellness</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: linear-gradient(to bottom, #f7f7f7, #fff);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('https://images.pexels.com/photos/3822624/pexels-photo-3822624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        .chat-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 500px;
+            height: 600px;
+            overflow-y: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-box .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .chat-box .message .text {
+            font-size: 16px;
+        }
+        .chat-box .message .sentiment {
+            font-size: 14px;
+            color: #666;
+        }
+        .input-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+        }
+        .input-box button {
+            background-color: #4CC3D9;
+            border-color: #4CC3D9;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .input-box button:hover {
+            background-color: #3aa9d1;
+            border-color: #3aa9d1;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="container">
+        <h1 class="text-center mt-5 text-white">Emotional Support and Wellness</h1>
+        <div class="chat-box" id="chat-box">
+            <div class="message">
+                <div class="text">Hello! How are you feeling today?</div>
+            </div>
+        </div>
+        <div class="input-box">
+            <input type="text" id="input" placeholder="Type your message...">
+            <button id="send">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const inputBox = document.getElementById('input');
+        const sendButton = document.getElementById('send');
+
+        sendButton.addEventListener('click', () => {
+            const userInput = inputBox.value;
+            inputBox.value = '';
+
+            const message = document.createElement('div');
+            message.className = 'message';
+            message.innerHTML = `
+                <div class="text">${userInput}</div>
+                <div class="sentiment">Analyzing sentiment...</div>
+            `;
+            chatBox.appendChild(message);
+
+            // Sentiment Analysis using NLTK or TextBlob
+            const sentiment = analyzeSentiment(userInput);
+            message.querySelector('.sentiment').innerText = Sentiment: ${sentiment};
+
+            // Provide emotional support and wellness suggestions based on sentiment
+            const suggestion = provideSuggestion(sentiment);
+            const suggestionMessage = document.createElement('div');
+            suggestionMessage.className = 'message';
+            suggestionMessage.innerHTML = `
+                <div class="text">${suggestion}</div>
+            `;
+            chatBox.appendChild(suggestionMessage);
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+        function analyzeSentiment(text) {
+            // Implement sentiment analysis using NLTK or TextBlob
+            // For demonstration purposes, return a random sentiment
+            const sentiments = ['Positive', 'Negative', 'Neutral'];
+            return sentiments[Math.floor(Math.random() * sentiments.length)];
+        }
+
+        function provideSuggestion(sentiment) {
+            // Implement emotional support and wellness suggestions based on sentiment
+            // For demonstration purposes, return a random suggestion
+            const suggestions = {
+                'Positive': 'Keep up the good work! You are doing great.',
+                'Negative': 'Don\'t worry, things will get better. Take a deep breath and focus on the present moment.',
+                'Neutral': 'Remember to take care of yourself and prioritize your well-being.'
+            };
+            return suggestions[sentiment];
+        }
+    </script>
+</body>
+</html>
